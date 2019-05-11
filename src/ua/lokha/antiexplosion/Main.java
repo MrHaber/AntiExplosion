@@ -23,18 +23,19 @@ public class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void on(BlockExplodeEvent event) {
-        event.blockList().clear();
+        event.setCancelled(true);
     }
 
     @EventHandler
     public void on(EntityExplodeEvent event) {
-        event.blockList().clear();
+        event.setCancelled(true);
     }
 
     @EventHandler
     public void on(HangingBreakByEntityEvent event) {
         if (event.getCause().equals(HangingBreakEvent.RemoveCause.EXPLOSION)) {
             event.setCancelled(true);
+            return;
         }
     }
 
@@ -42,6 +43,7 @@ public class Main extends JavaPlugin implements Listener {
     public void on(HangingBreakEvent event) {
         if (event.getCause().equals(HangingBreakEvent.RemoveCause.EXPLOSION)) {
             event.setCancelled(true);
+            return;// Выходим из метода
         }
     }
 }
